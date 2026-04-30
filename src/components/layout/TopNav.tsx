@@ -45,7 +45,6 @@ export default function TopNav() {
   };
 
   return (
-    {/* Added 'sticky top-0 z-50' so the header never disappears on scroll */}
     <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between md:justify-end px-4 sm:px-6 shadow-sm transition-colors sticky top-0 z-50">
       
       {/* Mobile Menu Toggle */}
