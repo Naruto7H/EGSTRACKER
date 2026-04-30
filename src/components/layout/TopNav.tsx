@@ -26,8 +26,9 @@ export default function TopNav() {
   }, []);
 
   return (
-    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between md:justify-end px-6 shadow-sm transition-colors relative z-40">
+    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between md:justify-end px-6 shadow-sm transition-colors relative z-50">
       
+      {/* Mobile Menu Toggle */}
       <button className="md:hidden p-2 text-slate-500" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
         {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
@@ -42,7 +43,7 @@ export default function TopNav() {
           </button>
 
           {showNotifs && (
-            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
+            <div className="absolute -right-16 sm:right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
               <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex justify-between bg-slate-50 dark:bg-slate-950/50">
                 <span className="font-semibold text-slate-900 dark:text-slate-50">Notifications</span>
               </div>
@@ -93,6 +94,17 @@ export default function TopNav() {
           )}
         </div>
       </div>
+
+      {/* Mobile Dropdown Menu (Switched from absolute to fixed) */}
+      {isMobileMenuOpen && (
+        <div className="fixed top-16 inset-x-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-lg md:hidden flex flex-col p-4 space-y-4 animate-in slide-in-from-top-2 z-50">
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Dashboard</Link>
+          <Link href="/data-entry" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Data Entry</Link>
+          <Link href="/calculator" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Calculator</Link>
+          <Link href="/reports" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Reports</Link>
+          <Link href="/settings" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Settings</Link>
+        </div>
+      )}
     </header>
   );
 }
