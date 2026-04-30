@@ -1,32 +1,31 @@
 import type { Metadata } from "next";
-import "./globals.css"; // Ensure you create this file with basic Tailwind directives
+import "./globals.css";
+import Sidebar from "@/components/layout/Sidebar";
 
 export const metadata: Metadata = {
-  title: "ESG Footprint Tracker",
+  title: "EcoTrack | ESG Dashboard Template",
   description: "B2B Environmental Impact Dashboard",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-slate-50 text-slate-900 min-h-screen flex">
-        {/* Placeholder for Sidebar Component */}
-        <aside className="w-64 bg-white border-r hidden md:block p-6">
-          <h1 className="text-xl font-bold text-primary">EcoTrack B2B</h1>
-          <nav className="mt-8 flex flex-col gap-4 text-sm text-slate-600">
-            <a href="#" className="font-semibold text-slate-900">Dashboard</a>
-            <a href="#">Data Entry</a>
-            <a href="#">Calculator</a>
-            <a href="#">Reports</a>
-          </nav>
-        </aside>
+      <body className="bg-slate-50 text-slate-900 min-h-screen flex antialiased">
+        <Sidebar />
         
-        <main className="flex-1 p-8">
-          {children}
+        <main className="flex-1 flex flex-col">
+          {/* Top Navbar Placeholder */}
+          <header className="h-16 bg-white border-b flex items-center justify-end px-8 shadow-sm">
+            <div className="h-8 w-8 rounded-full bg-slate-200 border-2 border-white shadow-sm overflow-hidden flex items-center justify-center">
+              <span className="text-xs font-bold text-slate-500">Admin</span>
+            </div>
+          </header>
+          
+          <div className="p-8 max-w-7xl mx-auto w-full">
+            {children}
+          </div>
         </main>
       </body>
     </html>
