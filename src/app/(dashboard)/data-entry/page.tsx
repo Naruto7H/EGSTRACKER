@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { UploadCloud, CheckCircle2, Clock, Loader2 } from "lucide-react";
+import { Upload, CheckCircle, Clock, Loader2 } from "lucide-react";
 
 const recentLogs = [
   { id: "LOG-001", month: "April 2026", scope: "Scope 2 (Energy)", value: "450 kWh", status: "Verified" },
@@ -17,11 +17,10 @@ export default function DataEntryPage() {
   const handleSimulatedUpload = () => {
     setIsUploading(true);
     setUploadComplete(false);
-    // Simulate a network upload delay
     setTimeout(() => {
       setIsUploading(false);
       setUploadComplete(true);
-      setTimeout(() => setUploadComplete(false), 3000); // Reset after 3s
+      setTimeout(() => setUploadComplete(false), 3000); 
     }, 2000);
   };
 
@@ -82,13 +81,13 @@ export default function DataEntryPage() {
             </div>
           ) : uploadComplete ? (
             <div className="flex flex-col items-center animate-in zoom-in duration-300">
-              <CheckCircle2 className="h-10 w-10 text-green-500 mb-2" />
+              <CheckCircle className="h-10 w-10 text-green-500 mb-2" />
               <p className="text-sm font-medium text-green-700 dark:text-green-400">Upload Successful!</p>
             </div>
           ) : (
             <>
               <div className="rounded-full bg-white dark:bg-slate-800 p-4 shadow-sm hover:scale-105 transition-transform">
-                <UploadCloud className="h-8 w-8 text-primary" />
+                <Upload className="h-8 w-8 text-primary" />
               </div>
               <div>
                 <h3 className="font-semibold text-slate-900 dark:text-slate-100">Bulk Upload (CSV)</h3>
@@ -128,7 +127,7 @@ export default function DataEntryPage() {
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
                       log.status === 'Verified' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
                     }`}>
-                      {log.status === 'Verified' ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Clock className="h-3.5 w-3.5" />} {log.status}
+                      {log.status === 'Verified' ? <CheckCircle className="h-3.5 w-3.5" /> : <Clock className="h-3.5 w-3.5" />} {log.status}
                     </span>
                   </td>
                 </tr>
