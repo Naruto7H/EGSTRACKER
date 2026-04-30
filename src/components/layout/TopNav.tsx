@@ -25,25 +25,45 @@ export default function TopNav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Ensure menus close each other to prevent overlapping
+  const toggleMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setShowNotifs(false);
+    setShowProfile(false);
+  };
+
+  const toggleNotifs = () => {
+    setShowNotifs(!showNotifs);
+    setShowProfile(false);
+    setIsMobileMenuOpen(false);
+  };
+
+  const toggleProfile = () => {
+    setShowProfile(!showProfile);
+    setShowNotifs(false);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between md:justify-end px-6 shadow-sm transition-colors relative z-50">
+    {/* Added 'sticky top-0 z-50' so the header never disappears on scroll */}
+    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between md:justify-end px-4 sm:px-6 shadow-sm transition-colors sticky top-0 z-50">
       
       {/* Mobile Menu Toggle */}
-      <button className="md:hidden p-2 text-slate-500" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+      <button className="md:hidden p-2 text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" onClick={toggleMenu}>
         {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         
         {/* Notifications */}
         <div className="relative" ref={notifRef}>
-          <button onClick={() => { setShowNotifs(!showNotifs); setShowProfile(false); }} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 relative">
+          <button onClick={toggleNotifs} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 relative transition-colors">
             <Bell className="h-5 w-5" />
             <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 border-2 border-white dark:border-slate-900"></span>
           </button>
 
           {showNotifs && (
-            <div className="absolute -right-16 sm:right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
+            <div className="fixed top-16 left-4 right-4 sm:absolute sm:top-full sm:left-auto sm:-right-4 mt-2 sm:w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 z-[60]">
               <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex justify-between bg-slate-50 dark:bg-slate-950/50">
                 <span className="font-semibold text-slate-900 dark:text-slate-50">Notifications</span>
               </div>
@@ -60,19 +80,19 @@ export default function TopNav() {
         
         {/* Theme Toggle */}
         {mounted && (
-          <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+          <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
         )}
 
         {/* Profile Dropdown */}
         <div className="relative" ref={profileRef}>
-          <div onClick={() => { setShowProfile(!showProfile); setShowNotifs(false); }} className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 border-2 border-white dark:border-slate-800 flex items-center justify-center ml-2 cursor-pointer hover:ring-2 hover:ring-primary/20 transition-all">
+          <div onClick={toggleProfile} className="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 border-2 border-white dark:border-slate-800 flex items-center justify-center ml-1 sm:ml-2 cursor-pointer hover:ring-2 hover:ring-primary/20 transition-all">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-300">AD</span>
           </div>
 
           {showProfile && (
-            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
+            <div className="fixed top-16 right-4 w-56 sm:absolute sm:top-full sm:-right-2 mt-2 sm:w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 z-[60]">
               <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800">
                 <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Admin User</p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 truncate">admin@company.com</p>
@@ -95,14 +115,14 @@ export default function TopNav() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu (Switched from absolute to fixed) */}
+      {/* Mobile Navigation Dropdown Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed top-16 inset-x-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-lg md:hidden flex flex-col p-4 space-y-4 animate-in slide-in-from-top-2 z-50">
-          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Dashboard</Link>
-          <Link href="/data-entry" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Data Entry</Link>
-          <Link href="/calculator" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Calculator</Link>
-          <Link href="/reports" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Reports</Link>
-          <Link href="/settings" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-700 dark:text-slate-200 font-medium px-2 py-1">Settings</Link>
+        <div className="fixed top-16 inset-x-0 bottom-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-xl md:hidden flex flex-col p-4 space-y-2 animate-in slide-in-from-top-2 z-40 overflow-y-auto">
+          <Link href="/" onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 font-medium px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Dashboard</Link>
+          <Link href="/data-entry" onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 font-medium px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Data Entry</Link>
+          <Link href="/calculator" onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 font-medium px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Calculator</Link>
+          <Link href="/reports" onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 font-medium px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Reports</Link>
+          <Link href="/settings" onClick={toggleMenu} className="text-slate-700 dark:text-slate-200 font-medium px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Settings</Link>
         </div>
       )}
     </header>
