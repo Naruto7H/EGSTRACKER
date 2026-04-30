@@ -35,8 +35,9 @@ export default function LandingPage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 dark:bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
           
           <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-50 dark:bg-green-900/30 text-primary dark:text-green-400 text-sm font-medium mb-8 border border-green-200 dark:border-green-800/50">
-              <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+            {/* Updated Badge Colors for High Contrast */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-sm font-semibold mb-8 border border-green-300 dark:border-green-700/50 shadow-sm">
+              <span className="flex h-2 w-2 rounded-full bg-green-600 dark:bg-green-400 animate-pulse"></span>
               EcoTrack v2.0 is now live
             </div>
             
