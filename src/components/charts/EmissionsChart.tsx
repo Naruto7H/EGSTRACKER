@@ -28,10 +28,16 @@ export default function EmissionsChart() {
             axisLine={false} 
             tickFormatter={(value) => `${value}t`} 
           />
-          <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="#f1f5f9" />
+          <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="#f1f5f9" strokeOpacity={0.2} />
           <Tooltip 
-            contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-            labelStyle={{ fontWeight: 'bold', color: '#0f172a' }}
+            contentStyle={{ 
+              borderRadius: '8px', 
+              border: '1px solid #334155', 
+              boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.3)',
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              color: '#f8fafc'
+            }}
+            itemStyle={{ color: '#4ade80', fontWeight: 'bold' }}
           />
           <Area 
             type="monotone" 
