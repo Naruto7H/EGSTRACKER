@@ -43,7 +43,7 @@ export default function SettingsPage() {
             <div className="p-6 space-y-6">
               <div className="flex items-center gap-6">
                 <div className="h-20 w-20 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xl font-bold text-slate-500 dark:text-slate-400">
-                  SN
+                  AD
                 </div>
                 <div>
                   <button className="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
@@ -55,7 +55,7 @@ export default function SettingsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Full Name</label>
-                  <input type="text" defaultValue="Suhail Nizar" className="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-transparent p-2 text-sm text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" />
+                  <input type="text" defaultValue="Admin User" className="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-transparent p-2 text-sm text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
@@ -86,33 +86,14 @@ export default function SettingsPage() {
               {/* Member 1 */}
               <div className="flex items-center justify-between p-6">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">SN</div>
+                  <div className="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">AD</div>
                   <div>
-                    <p className="font-medium text-sm text-slate-900 dark:text-slate-100">Suhail Nizar <span className="ml-2 text-xs bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-full">You</span></p>
+                    <p className="font-medium text-sm text-slate-900 dark:text-slate-100">Admin User <span className="ml-2 text-xs bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-full">You</span></p>
                     <p className="text-sm text-slate-500 dark:text-slate-400">admin@company.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="text-sm text-slate-500 dark:text-slate-400 hidden sm:inline-block">Owner</span>
-                  <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"><MoreHorizontal className="h-5 w-5" /></button>
-                </div>
-              </div>
-
-              {/* Member 2 */}
-              <div className="flex items-center justify-between p-6">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">JD</div>
-                  <div>
-                    <p className="font-medium text-sm text-slate-900 dark:text-slate-100">Jane Doe</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">jane.compliance@company.com</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <select className="text-sm border-none bg-transparent text-slate-600 dark:text-slate-300 outline-none cursor-pointer hidden sm:inline-block font-medium">
-                    <option>Editor</option>
-                    <option>Viewer</option>
-                    <option>Admin</option>
-                  </select>
                   <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"><MoreHorizontal className="h-5 w-5" /></button>
                 </div>
               </div>
