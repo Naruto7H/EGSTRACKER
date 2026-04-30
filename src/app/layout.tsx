@@ -1,33 +1,50 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Sidebar from "@/components/layout/Sidebar";
-import TopNav from "@/components/layout/TopNav";
-import { ThemeProvider } from "@/components/layout/ThemeProvider";
+"use client";
 
-export const metadata: Metadata = {
-  title: "EcoTrack | ESG Dashboard Template",
-  description: "B2B Environmental Impact Dashboard",
-};
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LayoutDashboard, Calculator, Database, FileBarChart, Settings, Leaf } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+const navigation = [
+  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Data Entry", href: "/data-entry", icon: Database },
+  { name: "Calculator", href: "/calculator", icon: Calculator },
+  { name: "Reports", href: "/reports", icon: FileBarChart },
+  { name: "Settings", href: "/settings", icon: Settings },
+];
+
+export default function Sidebar() {
+  const pathname = usePathname();
+
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex antialiased transition-colors">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Sidebar />
-          
-          <main className="flex-1 flex flex-col min-w-0">
-            {/* The interactive TopNav replaces the old placeholder header */}
-            <TopNav />
-            
-            <div className="p-8 max-w-7xl mx-auto w-full">
-              {children}
-            </div>
-          </main>
-        </ThemeProvider>
-      </body>
-    </html>
+    <aside className="w-64 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 min-h-screen flex flex-col p-6 shadow-sm hidden md:flex transition-colors">
+      <div className="flex items-center gap-2 mb-8">
+        <div className="bg-primary p-2 rounded-lg shadow-sm">
+          <Leaf className="h-5 w-5 text-white" />
+        </div>
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">EcoTrack</h1>
+      </div>
+
+      <nav className="flex-1 space-y-1">
+        {navigation.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                isActive 
+                  ? "bg-green-50 dark:bg-primary/10 text-primary dark:text-primary" 
+                  : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-slate-100"
+              )}
+            >
+              <item.icon className={cn("h-5 w-5", isActive ? "text-primary" : "text-slate-400 dark:text-slate-500")} />
+              {item.name}
+            </Link>
+          );
+        })}
+      </nav>
+    </aside>
   );
 }
