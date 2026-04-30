@@ -11,6 +11,13 @@ export default function ReportsPage() {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: "ESG_Compliance_Report",
+    // Force the browser to use A4 sizing and exact color printing
+    pageStyle: `
+      @page { size: auto; margin: 20mm; }
+      @media print {
+        body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      }
+    `,
   });
 
   return (
@@ -32,10 +39,10 @@ export default function ReportsPage() {
       {/* The Printable Area Wrapper */}
       <div className="bg-slate-200 dark:bg-slate-800/50 p-4 md:p-8 rounded-xl overflow-x-auto flex justify-center border border-slate-200 dark:border-slate-800 transition-colors">
         
-        {/* A4 Paper Styling - This is the exact div that gets printed */}
+        {/* A4 Paper Styling - Removed strict widths for the print view so the browser handles scaling naturally */}
         <div 
           ref={componentRef} 
-          className="bg-white text-black w-full min-w-[800px] max-w-[210mm] min-h-[297mm] p-12 shadow-md print:shadow-none print:p-0"
+          className="bg-white text-black w-full max-w-[800px] min-h-[1056px] p-8 md:p-12 shadow-md print:shadow-none print:w-full print:max-w-none print:min-h-0 print:p-0"
         >
           {/* Report Header */}
           <div className="border-b-2 border-slate-900 pb-6 mb-8 flex justify-between items-end">
@@ -53,7 +60,7 @@ export default function ReportsPage() {
           <div className="space-y-8">
             <section>
               <h2 className="text-xl font-bold border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
-                <FileText className="h-5 w-5" /> Executive Summary
+                <FileText className="h-5 w-5 text-slate-700" /> Executive Summary
               </h2>
               <p className="text-slate-700 leading-relaxed">
                 This document serves as the official record of greenhouse gas (GHG) emissions for the current reporting period. The data aggregated herein reflects total energy consumption, operational output, and value-chain impacts.
