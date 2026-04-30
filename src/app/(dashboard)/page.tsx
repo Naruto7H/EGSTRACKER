@@ -14,7 +14,6 @@ export default function Dashboard() {
 
       {/* KPI Cards */}
       <div className="grid gap-6 md:grid-cols-3">
-        {/* Card 1 */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors">
           <div className="flex items-center justify-between space-y-0 pb-2">
             <h3 className="tracking-tight text-sm font-medium text-slate-900 dark:text-slate-200">Total CO2e (Tons)</h3>
@@ -24,7 +23,6 @@ export default function Dashboard() {
           <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-1">-4% from last month</p>
         </div>
         
-        {/* Card 2 */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors">
           <div className="flex items-center justify-between space-y-0 pb-2">
             <h3 className="tracking-tight text-sm font-medium text-slate-900 dark:text-slate-200">Target Progress</h3>
@@ -36,14 +34,12 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* AI Advisor Widget replaces the 3rd KPI Card */}
         <AIAdvisor />
       </div>
 
-      {/* Charts Section - 2-Column Grid */}
+      {/* Charts Section */}
       <div className="grid gap-6 lg:grid-cols-3">
         
-        {/* Main Area Chart */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -51,14 +47,14 @@ export default function Dashboard() {
               <p className="text-sm text-slate-500 dark:text-slate-400">Monthly breakdown of Scope 1 CO2e</p>
             </div>
             <select className="rounded-md border border-slate-300 dark:border-slate-700 p-2 text-sm text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-primary/20 transition-colors">
-              <option>Last 6 Months</option>
-              <option>Year to Date</option>
+              {/* Added explicit background and text classes to options */}
+              <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">Last 6 Months</option>
+              <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">Year to Date</option>
             </select>
           </div>
           <EmissionsChart />
         </div>
 
-        {/* Donut Chart */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors lg:col-span-1">
           <div className="mb-4">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Scope Breakdown</h3>
