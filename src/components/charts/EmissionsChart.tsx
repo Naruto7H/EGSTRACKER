@@ -3,6 +3,21 @@
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { monthlyEmissions } from "@/lib/mock-data";
 
+// Custom Tailwind Tooltip
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-xl shadow-lg transition-colors">
+        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">{label}</p>
+        <p className="text-base font-bold text-slate-900 dark:text-slate-50">
+          {payload[0].value} <span className="text-sm font-normal text-slate-500 dark:text-slate-400">Tons CO2e</span>
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function EmissionsChart() {
   return (
     <div className="h-[350px] w-full mt-4">
@@ -29,16 +44,13 @@ export default function EmissionsChart() {
             tickFormatter={(value) => `${value}t`} 
           />
           <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="#f1f5f9" strokeOpacity={0.2} />
+          
+          {/* Replaced inline styles with Custom Tooltip */}
           <Tooltip 
-            contentStyle={{ 
-              borderRadius: '8px', 
-              border: '1px solid #334155', 
-              boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.3)',
-              backgroundColor: 'rgba(15, 23, 42, 0.95)',
-              color: '#f8fafc'
-            }}
-            itemStyle={{ color: '#4ade80', fontWeight: 'bold' }}
+            content={<CustomTooltip />} 
+            cursor={{ stroke: '#94a3b8', strokeWidth: 1, strokeDasharray: '4 4' }} 
           />
+          
           <Area 
             type="monotone" 
             dataKey="scope1" 
