@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Bell, Menu, X, CheckCircle2, AlertCircle, LogOut, User, Settings } from "lucide-react";
+import { Moon, Sun, Bell, Menu, X, CheckCircle, AlertCircle, LogOut, User, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
@@ -47,7 +47,7 @@ export default function TopNav() {
                 <span className="font-semibold text-slate-900 dark:text-slate-50">Notifications</span>
               </div>
               <div className="p-4 border-b border-slate-100 dark:border-slate-800/50 flex gap-3">
-                <AlertCircle className="h-5 w-5 text-amber-500" />
+                <AlertCircle className="h-5 w-5 text-amber-500 mt-0.5" />
                 <div>
                   <p className="text-sm text-slate-800 dark:text-slate-200 font-medium">Data Entry Missing</p>
                   <p className="text-xs text-slate-500 mt-1">Scope 2 data pending.</p>
@@ -57,6 +57,7 @@ export default function TopNav() {
           )}
         </div>
         
+        {/* Theme Toggle */}
         {mounted && (
           <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
