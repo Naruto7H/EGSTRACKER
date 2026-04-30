@@ -16,9 +16,9 @@ export default function ScopeDonutChart() {
           <Pie
             data={data}
             cx="50%"
-            cy="50%"
-            innerRadius={80}
-            outerRadius={110}
+            cy="45%"
+            innerRadius="55%"
+            outerRadius="80%"
             paddingAngle={2}
             dataKey="value"
             stroke="none"
@@ -37,7 +37,12 @@ export default function ScopeDonutChart() {
             itemStyle={{ fontWeight: 'bold' }}
             formatter={(value) => `${value} Tons`}
           />
-          <Legend verticalAlign="bottom" height={36} iconType="circle" />
+          <Legend 
+            verticalAlign="bottom" 
+            height={48} 
+            iconType="circle" 
+            wrapperStyle={{ fontSize: '13px', paddingTop: '16px' }}
+          />
         </PieChart>
       </ResponsiveContainer>
     </div>
