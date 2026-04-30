@@ -2,6 +2,7 @@ import { kpiData } from "@/lib/mock-data";
 import { Activity, Leaf, Target } from "lucide-react";
 import EmissionsChart from "@/components/charts/EmissionsChart";
 import ScopeDonutChart from "@/components/charts/ScopeDonutChart";
+import AIAdvisor from "@/components/esg/AIAdvisor";
 
 export default function Dashboard() {
   return (
@@ -11,15 +12,38 @@ export default function Dashboard() {
         <p className="text-slate-500 dark:text-slate-400 mt-1">Your company's carbon footprint and ESG metrics.</p>
       </header>
 
-      {/* KPI Cards (Keep your existing 3 KPI cards here) */}
+      {/* KPI Cards */}
       <div className="grid gap-6 md:grid-cols-3">
-         {/* ... Existing KPI Cards ... */}
+        {/* Card 1 */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors">
+          <div className="flex items-center justify-between space-y-0 pb-2">
+            <h3 className="tracking-tight text-sm font-medium text-slate-900 dark:text-slate-200">Total CO2e (Tons)</h3>
+            <Activity className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+          </div>
+          <div className="text-2xl font-bold text-slate-900 dark:text-slate-50">{kpiData.totalEmissions}</div>
+          <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-1">-4% from last month</p>
+        </div>
+        
+        {/* Card 2 */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors">
+          <div className="flex items-center justify-between space-y-0 pb-2">
+            <h3 className="tracking-tight text-sm font-medium text-slate-900 dark:text-slate-200">Target Progress</h3>
+            <Target className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+          </div>
+          <div className="text-2xl font-bold text-slate-900 dark:text-slate-50">{kpiData.targetProgress}%</div>
+          <div className="mt-3 h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+             <div className="h-2 rounded-full bg-primary transition-all duration-1000 ease-out" style={{ width: `${kpiData.targetProgress}%` }} />
+          </div>
+        </div>
+
+        {/* AI Advisor Widget replaces the 3rd KPI Card */}
+        <AIAdvisor />
       </div>
 
-      {/* Charts Section - Now a 2-Column Grid */}
+      {/* Charts Section - 2-Column Grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         
-        {/* Main Area Chart (Takes up 2 columns on large screens) */}
+        {/* Main Area Chart */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -34,7 +58,7 @@ export default function Dashboard() {
           <EmissionsChart />
         </div>
 
-        {/* New Donut Chart (Takes up 1 column) */}
+        {/* Donut Chart */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition-colors lg:col-span-1">
           <div className="mb-4">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Scope Breakdown</h3>
