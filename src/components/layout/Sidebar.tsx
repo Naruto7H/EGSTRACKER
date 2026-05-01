@@ -17,7 +17,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 min-h-screen flex flex-col p-6 shadow-sm hidden md:flex transition-colors">
+    <aside className="w-64 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 h-screen sticky top-0 overflow-y-auto flex flex-col p-6 shadow-sm hidden md:flex transition-colors z-20">
       <div className="flex items-center gap-2 mb-8">
         <div className="bg-primary p-2 rounded-lg shadow-sm">
           <Leaf className="h-5 w-5 text-white" />
