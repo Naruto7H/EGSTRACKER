@@ -34,7 +34,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <AIAdvisor />
+        <AIAdvisor targetProgress={kpiData.targetProgress} totalEmissions={kpiData.totalEmissions} />
       </div>
 
       {/* Charts Section */}
