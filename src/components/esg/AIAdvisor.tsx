@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { Sparkles, ArrowRight, Zap, Loader2 } from "lucide-react";
 
-export default function AIAdvisor() {
+interface AIAdvisorProps {
+  targetProgress?: number;
+  totalEmissions?: string;
+}
+
+export default function AIAdvisor({ targetProgress = 0, totalEmissions = "0" }: AIAdvisorProps) {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [insight, setInsight] = useState<string | null>(null);
 
@@ -11,16 +16,19 @@ export default function AIAdvisor() {
     setIsAnalyzing(true);
     setInsight(null);
     
-    // Simulate API delay
     setTimeout(() => {
-      setInsight("Insight: Switching 20% of your delivery fleet to EVs this quarter will reduce Scope 1 emissions by an estimated 15 tons while qualifying for regional tax incentives.");
+      // Dynamic response based on the props passed from the dashboard
+      const advice = targetProgress < 100 
+        ? `Insight: You are at ${targetProgress}% of your target. Switching 20% of your fleet to EVs will reduce your ${totalEmissions}t CO2e by an estimated 15 tons, accelerating your goals.`
+        : `Insight: Outstanding. You've hit your ${targetProgress}% goal. Let's focus on Scope 3 supply chain optimization next.`;
+        
+      setInsight(advice);
       setIsAnalyzing(false);
-    }, 2000);
+    }, 1500);
   };
 
   return (
     <div className="rounded-xl border border-indigo-200 dark:border-indigo-900 bg-gradient-to-br from-indigo-50 to-white dark:from-slate-900 dark:to-slate-950 p-6 shadow-sm relative overflow-hidden transition-colors h-full flex flex-col justify-between">
-      {/* Background glow */}
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-2xl pointer-events-none" />
 
       <div>
@@ -33,7 +41,7 @@ export default function AIAdvisor() {
         </p>
       </div>
 
-      <div className="mt-auto">
+      <div className="mt-auto z-10">
         {!insight && !isAnalyzing && (
           <button 
             onClick={generateInsight}
@@ -46,7 +54,7 @@ export default function AIAdvisor() {
         {isAnalyzing && (
           <div className="flex items-center justify-center py-3 text-indigo-600 dark:text-indigo-400 gap-2">
             <Loader2 className="h-5 w-5 animate-spin" />
-            <span className="text-sm font-medium animate-pulse">Analyzing emissions data...</span>
+            <span className="text-sm font-medium animate-pulse">Analyzing metrics...</span>
           </div>
         )}
 
